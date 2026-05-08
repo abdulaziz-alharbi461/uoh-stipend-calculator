@@ -4,14 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
- base: '/uoh-stipend-calculator/',
-  server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
-    },
-  },
+  base: '/uoh-stipend-calculator/',  
   plugins: [
     react(),
     mode === "development" && componentTagger(),
