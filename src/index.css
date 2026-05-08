@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 213 32% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 213 32% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 213 32% 12%;
+
+    --primary: 213 58% 20%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 30% 94%;
+    --secondary-foreground: 213 58% 20%;
+
+    --muted: 210 20% 95%;
+    --muted-foreground: 213 15% 46%;
+
+    --accent: 45 80% 55%;
+    --accent-foreground: 213 58% 15%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 25% 88%;
+    --input: 214 25% 88%;
+    --ring: 213 58% 20%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 213 58% 15%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 45 80% 55%;
+    --sidebar-primary-foreground: 213 58% 15%;
+    --sidebar-accent: 213 58% 25%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 213 40% 25%;
+    --sidebar-ring: 45 80% 55%;
+
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 210 80% 55%;
+    --info-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 213 40% 8%;
+    --foreground: 210 40% 98%;
+    --card: 213 40% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 213 40% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 60% 60%;
+    --primary-foreground: 213 40% 8%;
+    --secondary: 213 30% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 213 30% 18%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 45 80% 55%;
+    --accent-foreground: 213 40% 8%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 213 30% 20%;
+    --input: 213 30% 20%;
+    --ring: 210 60% 60%;
+    --sidebar-background: 213 40% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 45 80% 55%;
+    --sidebar-primary-foreground: 213 40% 8%;
+    --sidebar-accent: 213 30% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 213 30% 15%;
+    --sidebar-ring: 45 80% 55%;
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 210 80% 55%;
+    --info-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    direction: rtl;
+  }
+
+  body {
+    @apply bg-background text-foreground font-tajawal antialiased;
+  }
+}
