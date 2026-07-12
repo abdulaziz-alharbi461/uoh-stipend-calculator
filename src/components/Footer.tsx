@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="border-t border-border bg-card py-4">
       <div className="container mx-auto flex flex-col items-center gap-2 px-4 text-center">
         <a
-          href="https://www.linkedin.com/in/abdulaziz-al-harbi-22b952337?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+          href="https://www.linkedin.com/in/abdulaziz-al-nahil-22b952337?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"

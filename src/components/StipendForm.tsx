@@ -7,18 +7,39 @@ interface StipendFormProps {
   onResult: (result: StipendResult) => void;
 }
 
+const MAX_DEFERRED_SEMESTERS = 3;
+
 const StipendForm = ({ onResult }: StipendFormProps) => {
   const [selectedMajor, setSelectedMajor] = useState("");
   const [admissionYear, setAdmissionYear] = useState("");
   const [hours, setHours] = useState("");
   const [gpa, setGpa] = useState("");
   const [hasWarning, setHasWarning] = useState(false);
+  const [isTransfer, setIsTransfer] = useState(false);
+  const [transferSemesters, setTransferSemesters] = useState("");
+  const [hasDeferred, setHasDeferred] = useState(false);
+  const [deferredSemesters, setDeferredSemesters] = useState("");
+  const [deferredError, setDeferredError] = useState("");
   const years = getAdmissionYearOptions();
+
+  const handleDeferredChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const num = value === "" ? 0 : parseInt(value, 10);
+    if (num > MAX_DEFERRED_SEMESTERS) {
+      setDeferredError("الحد الأقصى للفصول المؤجلة هو 3 فصول دراسية");
+    } else {
+      setDeferredError("");
+    }
+    setDeferredSemesters(value);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const major = PREDEFINED_MAJORS.find((m) => m.name === selectedMajor);
     if (!major || !admissionYear || !hours || !gpa) return;
+    if (isTransfer && !transferSemesters) return;
+    if (hasDeferred && !deferredSemesters) return;
+    if (hasDeferred && parseInt(deferredSemesters, 10) > MAX_DEFERRED_SEMESTERS) return;
     const result = calculateStipend({
       majorDurationYears: major.duration,
       admissionYear: parseInt(admissionYear),
@@ -26,6 +47,10 @@ const StipendForm = ({ onResult }: StipendFormProps) => {
       registeredHours: parseInt(hours),
       gpa: parseFloat(gpa),
       hasWarning,
+      isTransfer,
+      transferSemesters: isTransfer ? parseInt(transferSemesters) : 0,
+      hasDeferred,
+      deferredSemesters: hasDeferred ? parseInt(deferredSemesters) : 0,
     });
     onResult(result);
   };
@@ -82,6 +107,72 @@ const StipendForm = ({ onResult }: StipendFormProps) => {
             ))}
           </select>
         </div>
+
+        <label className="flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2.5 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={isTransfer}
+            onChange={(e) => setIsTransfer(e.target.checked)}
+            className="h-4 w-4 accent-primary"
+          />
+          <span className="text-sm font-medium text-foreground">
+            هل أنت طالب محول من تخصص آخر؟
+          </span>
+        </label>
+
+        {isTransfer && (
+          <div className="animate-fade-in">
+            <label className="mb-1.5 block text-sm font-medium text-foreground">
+              عدد الفصول التي درستها قبل التحويل
+            </label>
+            <select
+              value={transferSemesters}
+              onChange={(e) => setTransferSemesters(e.target.value)}
+              required
+              className={inputCls}
+            >
+              <option value="">اختر عدد الفصول</option>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+                <option key={n} value={n}>{n} فصل</option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        <label className="flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2.5 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={hasDeferred}
+            onChange={(e) => setHasDeferred(e.target.checked)}
+            className="h-4 w-4 accent-primary"
+          />
+          <span className="text-sm font-medium text-foreground">
+            هل قمت بتأجيل فصول دراسية من قبل؟
+          </span>
+        </label>
+
+        {hasDeferred && (
+          <div className="animate-fade-in">
+            <label className="mb-1.5 block text-sm font-medium text-foreground">
+              عدد الفصول الدراسية المؤجلة
+            </label>
+            <select
+              value={deferredSemesters}
+              onChange={(e) => handleDeferredChange(e as unknown as React.ChangeEvent<HTMLInputElement>)}
+              required
+              className={inputCls}
+            >
+              <option value="">اختر عدد الفصول</option>
+              {[1, 2, 3].map((n) => (
+                <option key={n} value={n}>{n} فصل</option>
+              ))}
+            </select>
+            {deferredError && (
+              <p className="mt-1.5 text-sm text-destructive">{deferredError}</p>
+            )}
+          </div>
+        )}
+
 
         <div>
           <label className="mb-1.5 block text-sm font-medium text-foreground">

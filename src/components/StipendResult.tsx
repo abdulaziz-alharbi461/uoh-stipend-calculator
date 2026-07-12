@@ -1,5 +1,5 @@
 import type { StipendResult as StipendResultType } from "@/lib/stipend-data";
-import { AlertTriangle, CheckCircle, XCircle, Info } from "lucide-react";
+import { CheckCircle, XCircle, Info } from "lucide-react";
 
 interface StipendResultProps {
   result: StipendResultType;
@@ -29,39 +29,13 @@ const StipendResult = ({ result }: StipendResultProps) => {
     },
     not_eligible: {
       title: "غير مستحق للمكافأة",
-      desc: "لا تستوفي شرطًا أو أكثر من شروط الاستحقاق. راجع الأسباب أدناه.",
+      desc: isExpired
+        ? "انقضت المدة النظامية، لقد تجاوزت المدة المسموحة للتخصص."
+        : "لا تستوفي شرطًا أو أكثر من شروط الاستحقاق. راجع الأسباب أدناه.",
       cls: "border-destructive/40 bg-destructive/5",
       icon: <XCircle className="mt-0.5 h-6 w-6 shrink-0 text-destructive" />,
     },
-    check: {
-      title: "يرجى التحقق",
-      desc: "يوجد عوامل قد تؤثر على استحقاقك، يُنصح بمراجعة الجهة المختصة.",
-      cls: "border-warning/40 bg-warning/5",
-      icon: <AlertTriangle className="mt-0.5 h-6 w-6 shrink-0 text-warning" />,
-    },
   }[status];
-
-  const warnings: { type: "warn" | "fail"; text: string }[] = [];
-  if (registeredHours < 12)
-    warnings.push({
-      type: "fail",
-      text: "تنبيه: يجب ألا يقل عدد الساعات المسجلة عن 12 ساعة لاستحقاق المكافأة.",
-    });
-  if (gpa < 1.0)
-    warnings.push({
-      type: "fail",
-      text: "تنبيه: المكافأة تُقطع إذا نزل المعدل التراكمي عن 1.0 (من نظام 4.0).",
-    });
-  if (hasWarning)
-    warnings.push({
-      type: "warn",
-      text: "تنبيه: وجود إنذار أكاديمي قد يؤثر على استمرار صرف المكافأة.",
-    });
-  if (isLastYear)
-    warnings.push({
-      type: "warn",
-      text: "تنبيه: هذه هي آخر سنة لك، وبعدها تنقطع المكافأة.",
-    });
 
   return (
     <div className="animate-scale-in space-y-4">
@@ -75,25 +49,6 @@ const StipendResult = ({ result }: StipendResultProps) => {
           </div>
         </div>
       </div>
-
-      {/* Warnings */}
-      {warnings.length > 0 && (
-        <div className="space-y-2">
-          {warnings.map((w, i) => (
-            <div
-              key={i}
-              className={`flex items-start gap-2 rounded-md border-2 p-3 text-sm ${
-                w.type === "fail"
-                  ? "border-destructive/40 bg-destructive/5 text-destructive"
-                  : "border-warning/40 bg-warning/10 text-foreground"
-              }`}
-            >
-              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-              <span>{w.text}</span>
-            </div>
-          ))}
-        </div>
-      )}
 
       {/* Reasons */}
       <div className="rounded-lg border border-border bg-card p-5 shadow-sm">
@@ -150,6 +105,15 @@ const StipendResult = ({ result }: StipendResultProps) => {
               style={{ width: `${Math.min(100, (elapsedSemesters / totalSemesters) * 100)}%` }}
             />
           </div>
+        </div>
+
+        <div className="mt-5 space-y-2">
+          <p className="rounded-md border border-border bg-muted/40 p-3 text-xs leading-relaxed text-muted-foreground">
+            تنويه: حسب قوانين الجامعة، فصول التحويل تُحسب ضمن استحقاقك للمكافأة والمدة النظامية.
+          </p>
+          <p className="rounded-md border border-border bg-muted/40 p-3 text-xs leading-relaxed text-muted-foreground">
+            تنويه: حسب قوانين الجامعة، فصول التأجيل والانقطاع لا تُحسب ضمن المدة النظامية لاستحقاق المكافأة.
+          </p>
         </div>
       </div>
     </div>

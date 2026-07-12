@@ -32,7 +32,7 @@ export interface StipendResult {
   gpa: number;
   hasWarning: boolean;
   isEligible: boolean;
-  status: "eligible" | "not_eligible" | "check";
+  status: "eligible" | "not_eligible";
   reasons: EligibilityReason[];
 }
 
@@ -43,11 +43,16 @@ export interface CalculateInput {
   registeredHours: number;
   gpa: number;
   hasWarning: boolean;
+  isTransfer?: boolean;
+  transferSemesters?: number;
+  hasDeferred?: boolean;
+  deferredSemesters?: number;
 }
 
 export function calculateStipend(input: CalculateInput): StipendResult {
-  const { majorDurationYears, admissionYear, majorName, registeredHours, gpa, hasWarning } = input;
-  const totalSemesters = majorDurationYears * 2;
+  const { majorDurationYears, admissionYear, majorName, registeredHours, gpa, hasWarning, isTransfer, transferSemesters, hasDeferred, deferredSemesters } = input;
+  const deferredAdd = hasDeferred && deferredSemesters ? Math.max(0, Math.floor(deferredSemesters)) : 0;
+  const totalSemesters = majorDurationYears * 2 + deferredAdd;
 
   const now = new Date();
   const currentMonth = now.getMonth() + 1;
@@ -56,14 +61,31 @@ export function calculateStipend(input: CalculateInput): StipendResult {
   const yearsElapsed = currentAcademicStartYear - admissionYear;
   const isSecondSemester = currentMonth >= 2 && currentMonth < 9;
   const currentSemesterInYear = isSecondSemester ? 2 : 1;
-  const elapsedSemesters = yearsElapsed * 2 + currentSemesterInYear;
+  const transferAdd = isTransfer && transferSemesters ? Math.max(0, Math.floor(transferSemesters)) : 0;
+  const elapsedSemesters = yearsElapsed * 2 + currentSemesterInYear + transferAdd;
 
   const remainingSemesters = Math.max(0, totalSemesters - elapsedSemesters);
   const remainingYears = Math.ceil(remainingSemesters / 2);
-  const isLastYear = yearsElapsed === majorDurationYears - 1 && remainingSemesters > 0;
   const isExpired = elapsedSemesters > totalSemesters;
+  const isLastYear = !isExpired && remainingSemesters > 0 && remainingSemesters <= 2;
 
   const reasons: EligibilityReason[] = [];
+
+  // Transfer note
+  if (transferAdd > 0) {
+    reasons.push({
+      type: "warn",
+      text: `تم احتساب ${transferAdd} فصل من تخصصك السابق ضمن المدة النظامية.`,
+    });
+  }
+
+  // Deferred note
+  if (deferredAdd > 0) {
+    reasons.push({
+      type: "warn",
+      text: `تمت إضافة ${deferredAdd} فصل مؤجل إلى مدة استحقاقك (لا تُحسب ضمن المدة النظامية).`,
+    });
+  }
 
   // Duration
   if (isExpired) {
@@ -110,12 +132,7 @@ export function calculateStipend(input: CalculateInput): StipendResult {
   }
 
   const hasFail = reasons.some((r) => r.type === "fail");
-  const hasWarn = reasons.some((r) => r.type === "warn");
-  const status: "eligible" | "not_eligible" | "check" = hasFail
-    ? "not_eligible"
-    : hasWarn
-    ? "check"
-    : "eligible";
+  const status: "eligible" | "not_eligible" = hasFail ? "not_eligible" : "eligible";
   const isEligible = !hasFail;
 
   return {
