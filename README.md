@@ -1,73 +1,77 @@
-# Welcome to your Lovable project
+UoH Stipend Tracker
 
-## Project info
+The University of Hail students have a web application that helps them figure out how long they can get their University of Hail stipend.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+This web application is really useful for the University of Hail students because it helps them calculate and track the University of Hail stipend eligibility duration.
 
-## How can I edit this code?
+The University of Hail students can use this tool to get an idea of how they are eligible, for the University of Hail stipend.
 
-There are several ways of editing your application.
+It is basically a tool made for the University of Hail students to help them with the University of Hail stipend.
 
-**Use Lovable**
+ Overview
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+University stipend rules are really confusing. This is because it takes an amount of time to finish a course at each college. The university stipend rules make it hard to understand how it all works.
 
-Changes made via Lovable will be committed automatically to this repo.
+The university stipend rules are the problem.
 
-**Use your preferred IDE**
+This tool is here to help students. It helps students plan what they will do at university. It also helps students figure out how they will pay for university.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+The tool is easy to use. It helps students make a plan. This plan is for their time, at university. It also helps students manage their money using the university stipend. The university stipend is what students will use to pay for things at university.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+ Key Features
 
-Follow these steps:
+• Specialized Major Mapping: Pre-defined durations for the College of Computer Science and Engineering:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+• 5-Year Tracks: Computer Engineering, Software Engineering, and Network Engineering.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+• 4-Year Tracks: Computer Science, Information Security, Artificial Intelligence, and Data Science.
 
-# Step 3: Install the necessary dependencies.
-npm i
+• The app has a way to let you know when your time is running out. It does not say "0 years remaining". The app sends you a message that says "This is your year of stipend eligibility". This way the Final Year Logic makes sure you understand what is happening. You get the information you need to know. The Final Year Logic is really helpful because it gives you a warning that your time's almost up. The Final Year Logic is important because it tells you that you are, in your Final Year of stipend eligibility and that is why the Final Year Logic is useful.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+• Manual Entry Mode: This feature is really useful for students from colleges because it lets them type in what they're studying and how long they have been studying it. They can enter their major and all that stuff about their major like what college they went to and how long they were there in the Manual Entry Mode. The Manual Entry Mode is great because it gives students from colleges the freedom to enter all the details, about their major.
 
-**Edit a file directly in GitHub**
+• Full RTL Support: A modern, responsive Arabic interface designed with the University of Hail's visual identity.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+• Professional Dashboard: Real-time calculation of remaining semesters and years.
 
-**Use GitHub Codespaces**
+ Tech Stack
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+• Frontend: React.js / TypeScript.
 
-## What technologies are used for this project?
+• Styling: Tailwind CSS for a modern, responsive UI.
 
-This project is built with:
+• Deployment: Hosted on GitHub Pages.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+ Logic & Calculation
 
-## How can I deploy this project?
+The app decides if you can do something by following the University of Hyderabad rules. It uses the University of Hyderabad rules to see if you are eligible. The University of Hyderabad academic rules help the app figure out your eligibility.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+1. Calculates total eligible semesters (Duration \times 2).
 
-## Can I connect a custom domain to my Lovable project?
+2. Determines the student's current standing based on the admission year.
 
-Yes, you can!
+3. This plan includes the Nth year as a period of eligibility so the student is covered until the student actually graduates from school. The Nth year is really important because it makes sure the student has coverage for the students time, in school up until the student graduates from school.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+About me	 
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+I am Abdulaziz Al-Harbi. I am in my year at the University of Hail.
+
+I like making things that can help my community.
+
+Software Engineering is my major.
+
+I like Software Engineering because it is useful.
+
+I want to use Software Engineering to make my community a better place.
+
+I think Software Engineering can solve a lot of problems that we have.
+
+I am studying Software Engineering so I can help people, around me.
+
+I am on the internet. If you want to get in touch with Facebook or Twitter or the internet you can find me on the internet. To talk to me you can click on this link that's, on the internet.
+
+I really want you to get in touch with me. It would be great if you could connect with me and we could talk to each other. I am looking forward to hearing from you and having a conversation, with you so please connect with me.
+
+You can get in touch with me by clicking this link  Connect with Me
+
+My LinkedIn Profile (https://www.google.com/search?q=https://www.linkedin.com/in/abdulaziz-al-harbi-22b952337)
