@@ -11,8 +11,17 @@
     <meta property="og:type" content="website" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <script type="module" crossorigin src="/uoh-stipend-calculator/assets/index-BLUp0n47.js"></script>
-    <link rel="stylesheet" crossorigin href="/uoh-stipend-calculator/assets/index-BLT_SkKz.css">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          if (t === 'dark') document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <script type="module" crossorigin src="/uoh-stipend-calculator/assets/index-CekKK1sm.js"></script>
+    <link rel="stylesheet" crossorigin href="/uoh-stipend-calculator/assets/index-BfXOTqUW.css">
   </head>
 
   <body>
